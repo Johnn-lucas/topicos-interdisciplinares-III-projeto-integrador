@@ -1,0 +1,178 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 96%; /* Light gray - almost white */
+    --foreground: 20 10% 10%; /* Dark gray / Black for text */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 20 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 10% 10%;
+
+    --primary: 210 90% 50%; /* Vibrant Blue */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 220 10% 85%; /* Lighter gray for secondary elements */
+    --secondary-foreground: 20 10% 20%; /* Slightly lighter black */
+
+    --muted: 220 10% 90%; /* Muted gray */
+    --muted-foreground: 20 10% 40%; /* Muted black */
+
+    --accent: 210 80% 60%; /* Lighter Blue for accents */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    --destructive: 0 70% 50%; /* Clear Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --border: 210 20% 80%; /* Light blue-gray border */
+    --input: 210 30% 95%; /* Very light blue-gray for inputs */
+    --ring: 210 90% 50%; /* Vibrant Blue for focus rings */
+
+    --radius: 0.5rem;
+  }
+
+  /* Dark mode can be kept for future use or removed if not needed */
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 90% 60%; /* Lighter Blue for dark mode */
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 210 80% 70%; /* Lighter Blue accent for dark mode */
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 22.5%;
+    --ring: 210 90% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+#root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card styling adjusted for the new theme */
+.glassmorphic-card { /* Renaming for clarity, as it's not glassmorphic anymore */
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 12px 0 hsla(var(--foreground), 0.05);
+}
+
+.glassmorphic-card-light { /* Renaming for clarity */
+  background: hsl(var(--secondary)); /* Using secondary for a slight difference */
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid hsl(var(--border));
+   box-shadow: 0 2px 8px 0 hsla(var(--foreground), 0.03);
+}
+
+
+/* Input and Label styling adjusted for the new theme */
+.form-input {
+  background-color: hsl(var(--input)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-input:focus {
+  background-color: hsl(var(--card)) !important; /* Slightly whiter on focus */
+  border-color: hsl(var(--ring)) !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring)) !important;
+}
+
+.form-input::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.form-label {
+  color: hsl(var(--foreground)) !important;
+  font-weight: 500;
+}
+
+
+.content-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; 
+  padding-right: 1rem; 
+}
+
+@media (min-width: 640px) { 
+  .content-container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) { 
+  .content-container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) { 
+  .content-container {
+    max-width: 900px; /* Wider container for content pages */
+  }
+}
+@media (min-width: 1280px) { 
+  .content-container {
+    max-width: 1100px; 
+  }
+}
+
+
+.auth-container {
+   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem; 
+  padding-right: 1rem; 
+}
+@media (min-width: 640px) { 
+  .auth-container {
+    max-width: 450px; /* Centralized form on larger screens */
+  }
+}
+
+
+.mobile-full-width > div {
+  max-width: none !important; 
+}
+
+@media (min-width: 640px) { 
+  .mobile-full-width > div.max-w-md { /* Target specific form containers like in RegisterPage */
+    max-width: 450px !important; 
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+   .mobile-full-width > div:not(.max-w-md) { /* Target content pages if they were using this class */
+    max-width: 100% !important; /* Keep content pages wider */
+  }
+}
+  
